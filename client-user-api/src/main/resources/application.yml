@@ -1,0 +1,44 @@
+server:
+  port: 8081
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.exam.demo.*.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+#spring:
+#  profiles:
+#    include: dev
+#  application:
+#    name: springboot-user-8081
+#  cloud:
+#    config:
+#      uri: http://localhost:8003
+#      label: master
+#      name: configclient
+#      profile: dev
+#    discovery:
+#      enabled: true #启用服务发现
+#      service-id: server-config #指定要从eureka获取的config server的服务ID（即：configserverr的applicationName）
+
+info:
+  app.name: user
+
+ribbon:
+  eureka:
+    enabled: true

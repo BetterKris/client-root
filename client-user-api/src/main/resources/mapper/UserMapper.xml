@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.client.user.mapper.UserMapper" >
+
+    <resultMap id="BaseResultMap" type="com.client.user.entity.User">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+        <result column="attribute1" property="attribute1" jdbcType="VARCHAR"/>
+        <result column="attribute2" property="attribute2" jdbcType="VARCHAR"/>
+        <result column="attribute3" property="attribute3" jdbcType="VARCHAR"/>
+        <result column="attribute4" property="attribute4" jdbcType="VARCHAR"/>
+        <result column="attribute5" property="attribute5" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <select id="list" resultMap="BaseResultMap" parameterType="com.client.user.entity.User">
+        select * from user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name like "%"#{name}"%"
+            </if>
+            <if test="age != null">
+                and age = #{age}
+            </if>
+            <if test="createdAtStart != null and createdAtStart != ''">
+                <![CDATA[ and DATE_FORMAT(created_at , '%Y-%m-%d') >= #{createdAtStart} ]]>
+            </if>
+            <if test="createdAtEnd != null and createdAtEnd != ''">
+                <![CDATA[ and DATE_FORMAT(created_at , '%Y-%m-%d') <= #{createdAtEnd} ]]>
+            </if>
+            <if test="updatedAtStart != null and updatedAtStart != ''">
+                <![CDATA[ and DATE_FORMAT(updated_at , '%Y-%m-%d') >= #{updatedAtStart} ]]>
+            </if>
+            <if test="updatedAtEnd != null and updatedAtEnd != ''">
+                <![CDATA[ and DATE_FORMAT(updated_at , '%Y-%m-%d') <= #{updatedAtEnd} ]]>
+            </if>
+            <if test="attribute1 != null and attribute1 != ''">
+                and attribute1 = #{attribute1}
+            </if>
+            <if test="attribute2 != null and attribute2 != ''">
+                and attribute2 = #{attribute2}
+            </if>
+            <if test="attribute3 != null and attribute3 != ''">
+                and attribute3 = #{attribute3}
+            </if>
+            <if test="attribute4 != null and attribute4 != ''">
+                and attribute4 = #{attribute4}
+            </if>
+            <if test="attribute5 != null and attribute5 != ''">
+                and attribute5 = #{attribute5}
+            </if>
+        </where>
+    </select>
+
+    <select id="getById" resultMap="BaseResultMap" parameterType="Integer">
+        select * from user u where u.id = #{id}
+    </select>
+
+    <insert id="add" parameterType="com.client.user.entity.User" >
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="age != null" >
+                age,
+            </if>
+            <if test="createdAt != null" >
+                created_at,
+            </if>
+            <if test="updatedAt != null" >
+                updated_at,
+            </if>
+            <if test="attribute1 != null" >
+                attribute1,
+            </if>
+            <if test="attribute2 != null" >
+                attribute2,
+            </if>
+            <if test="attribute3 != null" >
+                attribute3,
+            </if>
+            <if test="attribute4 != null" >
+                attribute4,
+            </if>
+            <if test="attribute5 != null" >
+                attribute5,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id , jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name , jdbcType=VARCHAR},
+            </if>
+            <if test="age != null" >
+                #{age , jdbcType=INTEGER},
+            </if>
+            <if test="createdAt != null" >
+                #{createdAt , jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null" >
+                #{updatedAt , jdbcType=TIMESTAMP},
+            </if>
+            <if test="attribute1 != null" >
+                #{attribute1 , jdbcType=VARCHAR},
+            </if>
+            <if test="attribute2 != null" >
+                #{attribute2 , jdbcType=VARCHAR},
+            </if>
+            <if test="attribute3 != null" >
+                #{attribute3, jdbcType=VARCHAR},
+            </if>
+            <if test="attribute4 != null" >
+                #{attribute4 , jdbcType=VARCHAR},
+            </if>
+            <if test="attribute5 != null" >
+                #{attribute5 , jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.client.user.entity.User">
+        update user
+        <set>
+            <if test="name != null" >
+                name = #{name , jdbcType=VARCHAR},
+            </if>
+            <if test="age != null" >
+                age = #{age , jdbcType=INTEGER},
+            </if>
+            <if test="createdAt != null" >
+                created_at = #{age , jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null" >
+                updated_at = #{updatedAt , jdbcType=TIMESTAMP},
+            </if>
+            <if test="attribute1 != null" >
+                attribute1 = #{attribute1 , jdbcType=VARCHAR},
+            </if>
+            <if test="attribute2 != null" >
+                attribute2 = #{attribute2 , jdbcType=VARCHAR},
+            </if>
+            <if test="attribute3 != null" >
+                attribute3 = #{attribute3 , jdbcType=VARCHAR},
+            </if>
+            <if test="attribute4 != null" >
+                attribute4 = #{attribute4 , jdbcType=VARCHAR},
+            </if>
+            <if test="attribute5 != null" >
+                attribute5 = #{attribute5 , jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id , jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer" >
+        delete from user where id = #{id , jdbcType=INTEGER}
+    </delete>
+
+</mapper>

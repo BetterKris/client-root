@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://172.16.74.129:3306/demo?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimeZone=Asia/Shanghai
+#    url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimeZone=Asia/Shanghai
+    url: jdbc:mysql://172.17.0.2:3306/demo?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimeZone=Asia/Shanghai
+    username: root
+    password: admin
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.17.0.3:8000/eureka
+  instance:
+    instance-id: springboot-user-8081
+    hostname: springboot-user-8081

@@ -1,0 +1,1 @@
+INSERT INTO email (user_id , email) VALUES (2 , '2@rest.local');

@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    include: dev
+  application:
+    name: springboot-user-8081
+  cloud:
+    config:
+      uri: http://localhost:8003
+      label: master
+      name: configclient
+      profile: dev
+    discovery:
+      enabled: true #启用服务发现
+      service-id: server-config #指定要从eureka获取的config server的服务ID（即：configserverr的applicationName）
