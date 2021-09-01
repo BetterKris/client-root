@@ -31,6 +31,7 @@ public class UserController {
 
     @GetMapping("/list")
     public List<User> list(User user){
+
         PageHelper.startPage(user.getPageNum() , user.getPageSize());
         List<User> users = userService.list(user);
         List<User> resultList = new ArrayList<>();
