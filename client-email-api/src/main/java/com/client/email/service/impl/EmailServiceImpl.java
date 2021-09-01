@@ -9,10 +9,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public String getEmailById(Integer id) {
         if(id != null){
-            StringBuilder sb = new StringBuilder();
-            sb.append(id);
-            sb.append("@rest.local");
-            return sb.toString();
+            return id + "@rest.local";
         }else{
             return null;
         }
